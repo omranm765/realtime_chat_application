@@ -1,7 +1,0 @@
-de\htwsaar\messagebroker\controller\ChatController.class
-de\htwsaar\messagebroker\controller\UserController.class
-de\htwsaar\messagebroker\controller\ClientSubscriptionController.class
-de\htwsaar\messagebroker\BackendApplication.class
-de\htwsaar\messagebroker\controller\AdminController.class
-de\htwsaar\messagebroker\controller\ChatMessageController.class
-de\htwsaar\messagebroker\config\WebSocketConfig.class
