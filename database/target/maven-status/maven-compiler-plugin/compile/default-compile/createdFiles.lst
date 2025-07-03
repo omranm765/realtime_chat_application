@@ -1,0 +1,8 @@
+de\htwsaar\messagebroker\entity\ChatMessageEntity.class
+de\htwsaar\messagebroker\repository\UserRepository.class
+de\htwsaar\messagebroker\entity\EventTypeEntity.class
+de\htwsaar\messagebroker\entity\ClientEntity.class
+de\htwsaar\messagebroker\repository\ChatMessageRepository.class
+de\htwsaar\messagebroker\entity\UserEntity.class
+de\htwsaar\messagebroker\repository\EventTypeRepository.class
+de\htwsaar\messagebroker\repository\ClientRepository.class

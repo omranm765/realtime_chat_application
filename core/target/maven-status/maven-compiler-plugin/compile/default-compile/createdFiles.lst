@@ -1,0 +1,4 @@
+de\htwsaar\messagebroker\model\ChatMessage.class
+de\htwsaar\messagebroker\model\Client.class
+de\htwsaar\messagebroker\broker\MessageBroker.class
+de\htwsaar\messagebroker\model\EventType.class
