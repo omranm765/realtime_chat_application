@@ -16,6 +16,8 @@ public class ClientEntity {
     @Column(name = "event_type")
     private Set<String> subscribedEventTypes = new HashSet<>();
 
+    private long lastHeartbeat;
+
     public ClientEntity() {}
 
     public ClientEntity(String id) {
@@ -36,5 +38,13 @@ public class ClientEntity {
 
     public void setSubscribedEventTypes(Set<String> subscribedEventTypes) {
         this.subscribedEventTypes = subscribedEventTypes;
+    }
+
+    public long getLastHeartbeat() {
+        return lastHeartbeat;
+    }
+
+    public void setLastHeartbeat(long lastHeartbeat) {
+        this.lastHeartbeat = lastHeartbeat;
     }
 }

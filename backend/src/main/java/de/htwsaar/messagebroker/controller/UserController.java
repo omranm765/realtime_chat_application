@@ -2,6 +2,8 @@ package de.htwsaar.messagebroker.controller;
 
 import de.htwsaar.messagebroker.entity.UserEntity;
 import de.htwsaar.messagebroker.repository.UserRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -12,6 +14,7 @@ import java.util.List;
 public class UserController {
 
     private final UserRepository repo;
+    private static final Logger log = LoggerFactory.getLogger(UserController.class);
 
     public UserController(UserRepository repo) {
         this.repo = repo;
@@ -21,12 +24,13 @@ public class UserController {
     public ResponseEntity<UserEntity> registerUser(@RequestBody UserEntity user) {
         user.setCreatedAt(System.currentTimeMillis());
         UserEntity saved = repo.save(user);
+        log.info("Neuer User registriert: {}", saved.getEmail());
         return ResponseEntity.ok(saved);
     }
 
     @GetMapping
     public List<UserEntity> getAllUsers() {
-        System.out.println("UserController → getAllUsers() laeuft in Thread: " + Thread.currentThread().getName());
+        log.info("Alle Benutzer abgefragt – Thread: {}", Thread.currentThread().getName());
         return repo.findAll();
     }
 
@@ -43,4 +47,5 @@ public class UserController {
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
     }
+    // ToDO getById Not ByEmail
 }

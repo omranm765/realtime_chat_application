@@ -18,7 +18,7 @@
     <dependencies>
         <!-- Core-Modul einbinden -->
         <dependency>
-            <groupId>com.github.omranm765</groupId>
+            <groupId>de.htwsaar.messagebroker</groupId>
             <artifactId>core</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
@@ -57,6 +57,11 @@
             <artifactId>database</artifactId>
             <version>1.0-SNAPSHOT</version>
             <scope>compile</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-logging</artifactId>
         </dependency>
 
     </dependencies>
