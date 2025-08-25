@@ -63,7 +63,7 @@ Das System besteht aus mehreren Modulen:
 * `backend`: REST-API, STOMP-Endpoint, Controller
 * `client`: CLI-Client für Nutzer mit `WebSocketClientEndpoint`
 * `admin`: CLI für Eventverwaltung
-* `database`: `UserEntity`, `ChatMessageEntity`, `MessageDeliveryEntity`, `ClientEntity`
+* `database`: `UserEntity`, `ChatMessageEntity`, `MessageDeliveryEntity`, `ClientEntity`, `EventTypeEntity`
 
 ### Verteilungsdiagramm
 
