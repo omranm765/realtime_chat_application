@@ -1,8 +1,8 @@
 # MessageBroker – Echtzeit-Chat mit WebSocket & REST
 
-Ein Java-basiertes, modular aufgebautes Echtzeit-Chat-System mit einem selbst entwickelten Message Broker, WebSocket-Kommunikation (STOMP), REST-Schnittstellen, Admin-Konsole und CLI-Client.
-
-Ziel ist es, Publisher-Subscriber-Kommunikation für Chat-Nachrichten über Events zu ermöglichen – synchron (REST) und asynchron (WebSocket). Die Nachrichten sollen persistent gespeichert und offline zugestellt werden können. Der Admin kann Eventtypen verwalten und Systemstatus abrufen.
+Ein Java-basiertes, modular aufgebautes Echtzeit-Chat-System mit einem selbst entwickelten Message Broker.  
+Das System unterstützt **WebSocket-Kommunikation (STOMP)** für asynchrone Nachrichtenübertragung und **REST-Schnittstellen** für Registrierung, Verwaltung und Statusabfragen.  
+Nachrichten werden persistent gespeichert und können bei Offline-Clients nachträglich zugestellt werden.  
 
 ---
 
@@ -10,153 +10,211 @@ Ziel ist es, Publisher-Subscriber-Kommunikation für Chat-Nachrichten über Even
 
 ### Lösungsstrategie
 
-Die Anwendung basiert auf einer Microservice-Architektur mit Spring Boot und verwendet STOMP über WebSocket für asynchrone Kommunikation. REST wird für synchrone Registrierungen, Verwaltung und Nachrichtenverfolgung verwendet.
+Die Anwendung basiert auf einer **mehrschichtigen Architektur** mit Spring Boot und JPA.  
+- **Asynchron:** Nachrichtenübertragung per WebSocket/STOMP  
+- **Synchron:** Verwaltung (Registrierung, Events, Status) über REST  
+- **Persistenz:** Speicherung von Benutzern, Nachrichten, Events und Zustellstatus in MySQL  
 
-Das System besteht aus mehreren Modulen:
+### Modulübersicht
 
-* `backend`: zentrale REST-API und WebSocket-Endpunkt
-* `client`: CLI-Nutzeranwendung (subscribe, publish, etc.)
-* `admin`: CLI-Adminanwendung (Events, Clients, Status)
-* `database`: Persistenzschicht mit JPA/MySQL
+- **core** → Gemeinsame Modellklassen (z. B. `ChatMessage`)  
+- **database** → Entities & Repositories (JPA/MySQL)  
+- **backend** → REST-API & WebSocket-Server (Spring Boot)  
+- **client** → CLI-Client für Benutzer (Subscribe, Publish, History, Offline-Zustellung)  
+- **admin** → CLI-Admin-Konsole (Eventverwaltung, Status, User-Listing)  
 
-### Use Cases
+---
 
-* Nutzer kann sich registrieren, einloggen und Events abonnieren
-* Nutzer kann Nachrichten senden und empfangen
-* Nachrichten können auch empfangen werden, wenn der Nutzer offline war
-* Admin kann Events definieren/löschen, Online-Clients anzeigen, Systemstatus abfragen
+## Use Cases
 
-### Anforderungen
+- Nutzer kann sich **registrieren** oder einloggen  
+- Nutzer kann **Events abonnieren** und Nachrichten senden/empfangen  
+- Verpasste Nachrichten werden bei Reconnect **nachträglich zugestellt**  
+- Admin kann **Events anlegen/löschen**, **Clients registrieren**, **Systemstatus** abrufen  
+- Online-Clients werden über Heartbeats verwaltet  
 
-| Anforderung                   | Erfüllung | Erläuterung                                                                     |
-| ----------------------------- | --------- | ------------------------------------------------------------------------------- |
-| **MUST Have Anforderungen**   |           |                                                                                 |
-| M1                            | ja        | STOMP/WebSocket zwischen Publisher & Subscriber mit Spring Boot umgesetzt       |
-| M2                            | ja        | REST-API für Registrierung, Publish/Subscribe vorhanden                         |
-| M3                            | ja        | CLI-Client erlaubt publish, subscribe, unsubscribe, etc.                        |
-| M4                            | ja        | Admin-CLI mit Eventverwaltung & Statusabruf realisiert                          |
-| M5                            | ja        | Events sind dynamisch definierbar via Admin-CLI                                 |
-| M6                            | ja        | Sowohl Nutzer- als auch Admin-CLI umgesetzt                                     |
-| **SHOULD Have Anforderungen** |           |                                                                                 |
-| S1                            | ja        | Parallelverarbeitung durch Spring Boot, Logger zeigt Thread-IDs an              |
-| S2                            | ja        | Persistenz durch JPA + MySQL für Nutzer, Nachrichten, Events, Zustellungsstatus |
-| S3                            | ja        | REST-Endpunkt `/api/admin/status` zeigt Event- & Clientanzahl                   |
-| S4                            | ja        | Beispiel-Client (ClientConsole.java) mit allen Funktionen vorhanden             |
-| S5                            | ja        | Offline-Zustellung durch Nachrichtenabfrage + Delivered-Flag                    |
-| **COULD Have Anforderungen**  |           |                                                                                 |
-| C1                            | nein      | Kein vernetzter Broker, keine horizontale Skalierung                            |
-| C2                            | ja        | Nachrichtenzustellung wird erkannt (delivered-Flag in DB)                       |
-| C3                            | ja        | Logging in REST- und WS-Komponenten mit Slf4j (Infos, Fehler)                   |
-| C4                            | ja        | Admin-Interface erlaubt Event- und Systemverwaltung über CLI                    |
-| C5                            | ja        | Heartbeat + Online-Status-Management über REST + Timestamp-Check                |
-| **++ Anforderungen**          |           |                                                                                 |
-| ++1                           | ja        | Asynchrone Kommunikation über WebSocket mit STOMP                               |
-| ++2                           | ja        | Drei-Schichten-Architektur (Backend, DB, Clients) realisiert                    |
-| ++3                           | nein      | Keine Broker-Vernetzung / kein skalierbares Netzwerk                            |
+---
+
+## Anforderungen
+
+| Anforderung                   | Erfüllung | Erläuterung                                                                 |
+| ----------------------------- | --------- | --------------------------------------------------------------------------- |
+| **MUST Have**                 |           |                                                                             |
+| M1                            | ✅        | STOMP/WebSocket zwischen Publisher & Subscriber umgesetzt                   |
+| M2                            | ✅        | REST-API für Registrierung, Publish/Subscribe vorhanden                     |
+| M3                            | ✅        | CLI-Client erlaubt publish, subscribe, unsubscribe etc.                     |
+| M4                            | ✅        | Admin-CLI mit Eventverwaltung & Statusabfrage realisiert                    |
+| M5                            | ✅        | Events sind dynamisch definierbar via Admin-CLI                             |
+| M6                            | ✅        | Sowohl Nutzer- als auch Admin-CLI umgesetzt                                 |
+| **SHOULD Have**               |           |                                                                             |
+| S1                            | ✅        | Parallelverarbeitung durch Spring Boot (Thread-Logging)                     |
+| S2                            | ✅        | Persistenz über JPA + MySQL für User, Nachrichten, Events, Delivery-Status  |
+| S3                            | ✅        | `/api/admin/status` liefert Events- & Client-Anzahl                         |
+| S4                            | ✅        | Beispiel-Client (`ClientConsole`) mit allen Funktionen vorhanden            |
+| S5                            | ✅        | Offline-Zustellung mit Delivered-Flag realisiert                            |
+| **COULD Have**                |           |                                                                             |
+| C1                            | ❌        | Keine horizontale Skalierung / Broker-Vernetzung                            |
+| C2                            | ✅        | Zustellstatus wird in DB mit Delivered-Flag gespeichert                     |
+| C3                            | ✅        | Logging mit Slf4j in REST- und WS-Komponenten                               |
+| C4                            | ✅        | Admin-CLI erlaubt Event- und Systemverwaltung                               |
+| C5                            | ✅        | Heartbeat + Online-Status-Management per REST & Timestamp                   |
+| **++ Anforderungen**          |           |                                                                             |
+| ++1                           | ✅        | Asynchrone Kommunikation via STOMP-WebSocket                                |
+| ++2                           | ✅        | Drei-Schichten-Architektur (Backend, DB, Clients)                           |
+| ++3                           | ❌        | Keine Broker-Vernetzung / Cluster-Modus                                     |
 
 ---
 
 ## Statisches Modell
 
-### Komponentendiagramm
+### Komponenten
 
-* `backend`: REST-API, STOMP-Endpoint, Controller
-* `client`: CLI-Client für Nutzer mit `WebSocketClientEndpoint`
-* `admin`: CLI für Eventverwaltung
-* `database`: `UserEntity`, `ChatMessageEntity`, `MessageDeliveryEntity`, `ClientEntity`, `EventTypeEntity`
+- **backend**  
+  - `UserController`, `ChatMessageController`, `AdminController`, `ClientSubscriptionController`, `HeartbeatController`  
+  - `WebSocketConfig`, `ChatController` (STOMP)  
 
-### Verteilungsdiagramm
+- **client**  
+  - `ClientConsole` (CLI)  
+  - `WebSocketClientEndpoint`, `MessageHandler`  
 
-* Client und Admin CLI laufen lokal
-* Backend (Spring Boot) läuft als Server-Prozess
-* MySQL-Datenbank läuft als separater Dienst
+- **admin**  
+  - `AdminConsole` (CLI)  
+  - `AdminService`  
 
-### Klassendiagramme
-
-* `UserEntity`: ID, Email, Passwort, DisplayName
-* `ChatMessageEntity`: ID, Content, Timestamp, SenderId, EventType
-* `MessageDeliveryEntity`: clientId, messageId, deliveredAt
-* `ClientEntity`: clientId, subscribedEvents, lastHeartbeat
-
-### API (REST)
-
-* `POST /api/users` – Registrierung
-* `GET /api/users/by-email?email=` – Login-Validierung
-* `POST /api/admin/events` – Event definieren
-* `GET /api/admin/status` – Status anzeigen
-* `POST /api/messages/mark-delivered` – Nachrichten als gelesen markieren
-* `GET /api/messages/undelivered?clientId=` – verpasste Nachrichten abfragen
-* `POST /api/heartbeat` – Client-Online-Heartbeat
-* `POST /api/heartbeat/offline` – Client explizit als offline setzen
-* `GET /api/admin/clients/online` – Online-Clients anzeigen
+- **database**  
+  - Entities: `UserEntity`, `ChatMessageEntity`, `MessageDeliveryEntity`, `ClientEntity`, `EventTypeEntity`  
+  - Repositories: `UserRepository`, `ChatMessageRepository`, `MessageDeliveryRepository`, `ClientRepository`, `EventTypeRepository`  
 
 ### Datenbankmodell
 
-* 4 Tabellen: `users`, `chat_messages`, `message_delivery`, `clients`
-* Relationen zwischen Nachrichten, Nutzern und Delivery-Status
+- **users** → Benutzer (id, email, displayName, password, createdAt)  
+- **chat_messages** → Nachrichten (id, senderId, eventType, content, timestamp)  
+- **message_delivery** → Zustellungsstatus (id, messageId, clientId, deliveredAt)  
+- **event_types** → Event-Typen (id, name)  
+- **clients** → Clients (id, lastHeartbeat)  
+- **client_subscriptions** → Zwischentabelle (clientId, eventType)  
+
+---
+
+## REST API
+
+### User
+- `POST /api/users` – Registrierung  
+- `GET /api/users/by-email?email=` – Login  
+- `GET /api/users/{id}` – User nach ID  
+
+### Events & Admin
+- `POST /api/admin/events/{name}` – Event anlegen  
+- `DELETE /api/admin/events/{name}` – Event löschen  
+- `GET /api/admin/events` – Alle Events  
+- `GET /api/admin/status` – Status (Anzahl Events & Clients)  
+- `POST /api/admin/clients` – Client registrieren  
+- `GET /api/admin/clients` – Alle Clients  
+- `GET /api/admin/clients/online` – Online-Clients  
+- `GET /api/admin/clients/online-details` – Details zu Online-Clients  
+- `POST /api/admin/heartbeat/offline` – Client explizit offline setzen  
+
+### Clients & Messages
+- `POST /api/clients/{clientId}/subscribe/{event}` – Event abonnieren  
+- `DELETE /api/clients/{clientId}/unsubscribe/{event}` – Abo entfernen  
+- `GET /api/clients/{clientId}/subscriptions` – Aktive Subscriptions  
+
+- `GET /api/messages/{event}` – Nachrichten-Historie  
+- `GET /api/messages/undelivered?clientId=` – Ungestellte Nachrichten  
+- `POST /api/messages/mark-delivered?clientId=` – Nachrichten als zugestellt markieren  
+
+### Heartbeat
+- `POST /api/heartbeat` – Client hält sich online  
 
 ---
 
 ## Dynamisches Modell
 
-### Aktivittsdiagramm
-
-* Registrierung/Login
-* Nachricht senden
-* Nachricht empfangen
-* Offline-Zustellung mit „Delivered“-Status
-
-### Sequenzdiagramm
-
-* Nutzer sendet Nachricht → Server speichert + verteilt → andere Clients empfangen
-* Beim Start: verpasste Nachrichten → abgerufen → markiert als geliefert
+- **Registrierung/Login**: User wird erstellt oder aus DB geladen  
+- **Subscribe**: Client abonniert Topic → DB & WS-Subscription  
+- **Publish**: Nachricht gespeichert → an Subscribed Clients verteilt → Delivery markiert  
+- **Offline-Zustellung**: Beim Reconnect → ungelesene Nachrichten werden nachgeladen  
+- **Admin**: Kann Events verwalten, Status abrufen, Clients sehen  
 
 ---
 
 ## Getting Started
 
 ### Voraussetzungen
+- Java 17+  
+- Maven 3.9+  
+- MySQL (Schema: `messagebroker_db`)  
 
-* Java 17+
-* Maven
-* MySQL-Server (Schema: `messagebroker`)
-
-### Installation & Deployment
+### Installation
 
 ```bash
-# Backend bauen & starten
+# Komplettes Projekt bauen
+mvn clean install -U
+```
+
+### Starten
+
+```bash
+# Backend starten (REST + WebSocket)
+cd realtime_chat_application-main
 cd backend
 mvn spring-boot:run
 
-# Client starten
-cd client
-mvn compile
-java -cp target/client-1.0.jar de.htwsaar.messagebroker.client.ClientConsole
-
-# Admin starten
+# Admin-CLI starten
+cd realtime_chat_application-main
 cd admin
 mvn compile
-java -cp target/admin-1.0.jar de.htwsaar.messagebroker.admin.AdminConsole
+mvn exec:java
+
+# Client-CLI starten/multiple instances allowed
+cd realtime_chat_application-main
+cd client
+mvn compile
+mvn exec:java
+```
+
+---
+
+## CLI-Befehle
+
+### AdminConsole
+```
+create-event <name>
+delete-event <name>
+list-events
+list-users
+status
+commands
+exit
+```
+
+### ClientConsole
+```
+subscribe <event>
+publish <event> <message>
+unsubscribe
+multi-subscribe
+multi-unsubscribe
+multi-publish <event>
+list-events
+my-events
+online-clients
+commands
+exit
 ```
 
 ---
 
 ## Built With
-
-* **Spring Boot** – REST & WebSocket
-* **STOMP** – WebSocket-Protokoll
-* **MySQL** – Persistenz
-* **JPA/Hibernate** – ORM
-* **Maven** – Build Tool
-* **Slf4j** – Logging
+- **Spring Boot** – REST & WebSocket  
+- **STOMP** – WebSocket-Protokoll  
+- **MySQL** – Persistenz  
+- **JPA/Hibernate** – ORM  
+- **Maven** – Build Tool  
+- **Slf4j** – Logging  
 
 ---
 
 ## License
+Open Source für akademische Zwecke (MIT oder ähnlich)  
 
-Open Source für akademische Zwecke (MIT oder ähnlich)
-
-## Acknowledgments
-
-* Prof. Dr.-Ing. Klaus Berberich für die Aufgabenstellung
-* Inspiration durch Messaging-Systeme wie Kafka & RabbitMQ
