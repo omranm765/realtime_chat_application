@@ -1,0 +1,342 @@
+.app-root {
+    -fx-background-color: linear-gradient(to bottom right, #07130f, #132a21 48%, #3a2216);
+    -fx-font-family: "Bahnschrift", "Segoe UI Semibold", "Segoe UI";
+}
+
+.page {
+    -fx-padding: 24;
+}
+
+.page-scroll,
+.page-scroll .viewport {
+    -fx-background-color: transparent;
+}
+
+.page-scroll {
+    -fx-background: transparent;
+}
+
+.header,
+.card {
+    -fx-background-color: rgba(9, 20, 16, 0.82);
+    -fx-background-radius: 28;
+    -fx-border-color: rgba(255, 244, 214, 0.12);
+    -fx-border-radius: 28;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.34), 28, 0.2, 0, 14);
+}
+
+.header {
+    -fx-padding: 22 26;
+}
+
+.body {
+    -fx-alignment: stretch;
+}
+
+.admin-root {
+    -fx-spacing: 16;
+}
+
+.admin-tab-content {
+    -fx-padding: 16 4 10 4;
+}
+
+.tab-pane {
+    -fx-background-color: transparent;
+}
+
+.tab-pane .tab-header-area .tab-header-background {
+    -fx-background-color: transparent;
+}
+
+.tab-pane .tab {
+    -fx-background-color: rgba(255, 255, 255, 0.08);
+    -fx-background-radius: 14 14 0 0;
+    -fx-padding: 8 16;
+}
+
+.tab-pane .tab:selected {
+    -fx-background-color: #f0a94a;
+}
+
+.tab-pane .tab-label {
+    -fx-text-fill: #fff4d6;
+    -fx-font-weight: 800;
+}
+
+.tab-pane .tab:selected .tab-label {
+    -fx-text-fill: #1d1307;
+}
+
+.tab-pane .tab-content-area {
+    -fx-background-color: rgba(9, 20, 16, 0.72);
+    -fx-background-radius: 0 22 22 22;
+    -fx-padding: 8;
+}
+
+.sidebar {
+    -fx-pref-width: 350;
+    -fx-min-width: 330;
+}
+
+.card {
+    -fx-padding: 18;
+}
+
+.chat-card {
+    -fx-padding: 20;
+    -fx-min-width: 560;
+}
+
+.eyebrow {
+    -fx-text-fill: #f0a94a;
+    -fx-font-size: 12;
+    -fx-font-weight: 700;
+    -fx-letter-spacing: 1.8;
+}
+
+.app-title {
+    -fx-text-fill: #fff4d6;
+    -fx-font-size: 34;
+    -fx-font-weight: 800;
+}
+
+.app-subtitle,
+.hint,
+.chat-meta,
+.section-label,
+.message-meta {
+    -fx-text-fill: #9db2a7;
+}
+
+.app-subtitle {
+    -fx-font-size: 13;
+}
+
+.card-title {
+    -fx-text-fill: #fff4d6;
+    -fx-font-size: 17;
+    -fx-font-weight: 800;
+}
+
+.section-label {
+    -fx-font-size: 11;
+    -fx-font-weight: 700;
+    -fx-padding: 7 0 0 0;
+}
+
+.chat-title {
+    -fx-text-fill: #fff4d6;
+    -fx-font-size: 24;
+    -fx-font-weight: 800;
+}
+
+.metric {
+    -fx-text-fill: #70e0b8;
+    -fx-font-size: 13;
+    -fx-font-weight: 700;
+}
+
+.badge {
+    -fx-background-radius: 999;
+    -fx-padding: 8 13;
+    -fx-font-size: 12;
+    -fx-font-weight: 800;
+}
+
+.badge-muted {
+    -fx-background-color: rgba(255, 255, 255, 0.08);
+    -fx-text-fill: #d6d1bd;
+}
+
+.badge-live {
+    -fx-background-color: rgba(112, 224, 184, 0.18);
+    -fx-text-fill: #8ff5ce;
+}
+
+.badge-danger {
+    -fx-background-color: rgba(244, 102, 82, 0.18);
+    -fx-text-fill: #ff9b8d;
+}
+
+.text-field,
+.password-field {
+    -fx-background-color: rgba(255, 255, 255, 0.07);
+    -fx-background-radius: 16;
+    -fx-border-color: rgba(255, 244, 214, 0.11);
+    -fx-border-radius: 16;
+    -fx-text-fill: #fff4d6;
+    -fx-prompt-text-fill: #71877d;
+    -fx-padding: 11 13;
+}
+
+.text-field:focused,
+.password-field:focused {
+    -fx-border-color: #f0a94a;
+    -fx-background-color: rgba(255, 255, 255, 0.1);
+}
+
+.app-button {
+    -fx-background-radius: 999;
+    -fx-border-radius: 999;
+    -fx-padding: 9 14;
+    -fx-font-weight: 800;
+    -fx-cursor: hand;
+}
+
+.button-primary {
+    -fx-background-color: #f0a94a;
+    -fx-text-fill: #1d1307;
+}
+
+.button-secondary {
+    -fx-background-color: #70e0b8;
+    -fx-text-fill: #06130f;
+}
+
+.button-ghost {
+    -fx-background-color: rgba(255, 255, 255, 0.08);
+    -fx-text-fill: #fff4d6;
+    -fx-border-color: rgba(255, 244, 214, 0.11);
+}
+
+.button-danger {
+    -fx-background-color: rgba(244, 102, 82, 0.18);
+    -fx-text-fill: #ffb0a5;
+    -fx-border-color: rgba(244, 102, 82, 0.28);
+}
+
+.app-button:hover {
+    -fx-translate-y: -1;
+    -fx-effect: dropshadow(gaussian, rgba(240, 169, 74, 0.22), 18, 0.2, 0, 8);
+}
+
+.app-button:disabled,
+.text-field:disabled,
+.password-field:disabled,
+.clean-list:disabled {
+    -fx-opacity: 0.48;
+}
+
+.clean-list {
+    -fx-background-color: rgba(0, 0, 0, 0.16);
+    -fx-background-radius: 18;
+    -fx-border-color: rgba(255, 244, 214, 0.09);
+    -fx-border-radius: 18;
+    -fx-padding: 6;
+}
+
+.clean-list .list-cell {
+    -fx-background-color: transparent;
+    -fx-background-radius: 12;
+    -fx-text-fill: #e9dfc5;
+    -fx-padding: 8 10;
+}
+
+.clean-list .list-cell:filled:hover {
+    -fx-background-color: rgba(255, 255, 255, 0.08);
+}
+
+.clean-list .list-cell:filled:selected {
+    -fx-background-color: #f0a94a;
+    -fx-text-fill: #1d1307;
+}
+
+.clean-list .subscribed-cell {
+    -fx-text-fill: #8ff5ce;
+    -fx-font-weight: 800;
+}
+
+.message-scroll {
+    -fx-background-color: rgba(0, 0, 0, 0.16);
+    -fx-background-radius: 24;
+    -fx-border-color: rgba(255, 244, 214, 0.09);
+    -fx-border-radius: 24;
+    -fx-padding: 8;
+}
+
+.message-scroll .viewport,
+.message-box {
+    -fx-background-color: transparent;
+}
+
+.message-box {
+    -fx-padding: 18;
+}
+
+.empty-state {
+    -fx-background-color: rgba(255, 255, 255, 0.04);
+    -fx-background-radius: 22;
+}
+
+.empty-state .label {
+    -fx-text-fill: #8ea69a;
+    -fx-font-size: 15;
+    -fx-font-weight: 700;
+}
+
+.message-row {
+    -fx-padding: 2 0;
+}
+
+.message-bubble {
+    -fx-background-radius: 20;
+    -fx-padding: 11 14;
+}
+
+.message-incoming {
+    -fx-background-color: rgba(255, 244, 214, 0.1);
+    -fx-border-color: rgba(255, 244, 214, 0.08);
+    -fx-border-radius: 20;
+}
+
+.message-own {
+    -fx-background-color: linear-gradient(to bottom right, #f0a94a, #ffcf7a);
+}
+
+.message-own .message-meta,
+.message-own .message-content {
+    -fx-text-fill: #1d1307;
+}
+
+.message-content {
+    -fx-text-fill: #fff4d6;
+    -fx-font-size: 14;
+    -fx-line-spacing: 2;
+}
+
+.message-meta {
+    -fx-font-size: 11;
+    -fx-font-weight: 800;
+}
+
+.composer {
+    -fx-padding: 4 0 0 0;
+}
+
+.status-line {
+    -fx-padding: 11 24 16 24;
+    -fx-font-weight: 800;
+}
+
+.status-muted {
+    -fx-text-fill: #9db2a7;
+}
+
+.status-ok {
+    -fx-text-fill: #8ff5ce;
+}
+
+.status-error {
+    -fx-text-fill: #ffb0a5;
+}
+
+.scroll-bar:vertical,
+.scroll-bar:horizontal {
+    -fx-background-color: transparent;
+}
+
+.scroll-bar .thumb {
+    -fx-background-color: rgba(255, 244, 214, 0.2);
+    -fx-background-radius: 999;
+}

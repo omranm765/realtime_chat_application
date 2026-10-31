@@ -1,0 +1,47 @@
+2026-07-08T02:02:33.594+02:00  INFO 22660 --- [main] d.h.messagebroker.BackendApplication     : Starting BackendApplication using Java 25.0.3 with PID 22660 (C:\Users\omran\Desktop\realtime_chat_application-main\realtime_chat_application\backend\target\classes started by omran in C:\Users\omran\Desktop\realtime_chat_application-main\realtime_chat_application\backend)
+2026-07-08T02:02:33.602+02:00  INFO 22660 --- [main] d.h.messagebroker.BackendApplication     : No active profile set, falling back to 1 default profile: "default"
+2026-07-08T02:02:34.099+02:00  INFO 22660 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-07-08T02:02:34.150+02:00  INFO 22660 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 42 ms. Found 5 JPA repository interfaces.
+2026-07-08T02:02:34.562+02:00  INFO 22660 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2026-07-08T02:02:34.576+02:00  INFO 22660 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2026-07-08T02:02:34.577+02:00  INFO 22660 --- [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.20]
+2026-07-08T02:02:34.643+02:00  INFO 22660 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2026-07-08T02:02:34.643+02:00  INFO 22660 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1003 ms
+2026-07-08T02:02:34.775+02:00  INFO 22660 --- [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2026-07-08T02:02:34.848+02:00  INFO 22660 --- [main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.4.4.Final
+2026-07-08T02:02:34.884+02:00  INFO 22660 --- [main] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2026-07-08T02:02:35.130+02:00  INFO 22660 --- [main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-07-08T02:02:35.155+02:00  INFO 22660 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2026-07-08T02:02:35.298+02:00  INFO 22660 --- [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@6c5ca0b6
+2026-07-08T02:02:35.300+02:00  INFO 22660 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2026-07-08T02:02:35.343+02:00  WARN 22660 --- [main] org.hibernate.dialect.Dialect            : HHH000511: The 5.5.0 version for [org.hibernate.dialect.MySQLDialect] is no longer supported, hence certain features may not work properly. The minimum supported version is 8.0.0. Check the community dialects project for available legacy versions.
+2026-07-08T02:02:35.347+02:00  WARN 22660 --- [main] org.hibernate.orm.deprecation            : HHH90000025: MySQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2026-07-08T02:02:36.102+02:00  INFO 22660 --- [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-07-08T02:02:36.206+02:00  INFO 22660 --- [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-07-08T02:02:36.567+02:00  WARN 22660 --- [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-07-08T02:02:36.794+02:00  INFO 22660 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path ''
+2026-07-08T02:02:36.795+02:00  INFO 22660 --- [main] o.s.m.s.b.SimpleBrokerMessageHandler     : Starting...
+2026-07-08T02:02:36.795+02:00  INFO 22660 --- [main] o.s.m.s.b.SimpleBrokerMessageHandler     : BrokerAvailabilityEvent[available=true, SimpleBrokerMessageHandler [org.springframework.messaging.simp.broker.DefaultSubscriptionRegistry@29ddaa8e]]
+2026-07-08T02:02:36.795+02:00  INFO 22660 --- [main] o.s.m.s.b.SimpleBrokerMessageHandler     : Started.
+2026-07-08T02:02:36.800+02:00  INFO 22660 --- [main] d.h.messagebroker.BackendApplication     : Started BackendApplication in 3.57 seconds (process running for 3.877)
+2026-07-08T02:03:33.334+02:00  INFO 22660 --- [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-07-08T02:03:33.334+02:00  INFO 22660 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2026-07-08T02:03:33.335+02:00  INFO 22660 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
+2026-07-08T02:03:33.720+02:00  INFO 22660 --- [http-nio-8080-exec-2] d.h.m.controller.AdminController         : Client 'asdasd' ist bereits registriert
+2026-07-08T02:03:33.735+02:00  INFO 22660 --- [http-nio-8080-exec-4] d.h.m.controller.UserController          : Abfrage der Subscriptions von Client 'asdasd'
+2026-07-08T02:03:33.738+02:00  INFO 22660 --- [http-nio-8080-exec-3] d.h.m.controller.AdminController         : Alle Events abgefragt (6 gefunden)
+2026-07-08T02:03:33.756+02:00  INFO 22660 --- [http-nio-8080-exec-8] d.h.m.c.ClientSubscriptionController     : Nachrichtenabfrage für Event 'chatroom1', Thread: http-nio-8080-exec-8
+2026-07-08T02:03:33.757+02:00  INFO 22660 --- [http-nio-8080-exec-9] d.h.m.c.ClientSubscriptionController     : Nachrichtenabfrage für Event 'chatroom1', Thread: http-nio-8080-exec-9
+2026-07-08T02:03:33.760+02:00  INFO 22660 --- [http-nio-8080-exec-7] d.h.m.controller.AdminController         : Status abgefragt: Events: 6, Clients: 3
+2026-07-08T02:03:36.778+02:00  INFO 22660 --- [MessageBroker-1] o.s.w.s.c.WebSocketMessageBrokerStats    : WebSocketSession[1 current WS(1)-HttpStream(0)-HttpPoll(0), 1 total, 0 closed abnormally (0 connect failure, 0 send limit, 0 transport error)], stompSubProtocol[processed CONNECT(1)-CONNECTED(1)-DISCONNECT(0)], stompBrokerRelay[null], inboundChannel[pool size = 15, active threads = 0, queued tasks = 0, completed tasks = 15], outboundChannel[pool size = 1, active threads = 0, queued tasks = 0, completed tasks = 1], sockJsScheduler[pool size = 1, active threads = 1, queued tasks = 0, completed tasks = 0]
+2026-07-08T02:03:45.901+02:00  INFO 22660 --- [http-nio-8080-exec-9] d.h.m.controller.AdminController         : Client 'dsadsa' ist bereits registriert
+2026-07-08T02:03:45.906+02:00  INFO 22660 --- [http-nio-8080-exec-1] d.h.m.controller.UserController          : Abfrage der Subscriptions von Client 'dsadsa'
+2026-07-08T02:03:45.908+02:00  INFO 22660 --- [http-nio-8080-exec-8] d.h.m.controller.AdminController         : Alle Events abgefragt (6 gefunden)
+2026-07-08T02:03:45.911+02:00  INFO 22660 --- [http-nio-8080-exec-4] d.h.m.c.ClientSubscriptionController     : Nachrichtenabfrage für Event 'chatroom1', Thread: http-nio-8080-exec-4
+2026-07-08T02:03:45.911+02:00  INFO 22660 --- [http-nio-8080-exec-5] d.h.m.c.ClientSubscriptionController     : Nachrichtenabfrage für Event 'chatroom1', Thread: http-nio-8080-exec-5
+2026-07-08T02:03:45.914+02:00  INFO 22660 --- [http-nio-8080-exec-3] d.h.m.controller.AdminController         : Status abgefragt: Events: 6, Clients: 3
+2026-07-08T02:03:53.895+02:00  INFO 22660 --- [clientInboundChannel-31] d.h.m.controller.ChatController          : Empfange Nachricht von User-ID 1, Event 'chatroom1', Thread: clientInboundChannel-31
+2026-07-08T02:03:53.909+02:00  INFO 22660 --- [clientInboundChannel-31] d.h.m.controller.ChatController          : Nachricht an Topic 'chatroom1' gesendet
+2026-07-08T02:03:53.933+02:00  INFO 22660 --- [http-nio-8080-exec-8] d.h.m.c.ClientSubscriptionController     : Client 'asdasd' hat 1 Nachrichten als zugestellt markiert.
+2026-07-08T02:03:53.933+02:00  INFO 22660 --- [http-nio-8080-exec-3] d.h.m.c.ClientSubscriptionController     : Client 'dsadsa' hat 1 Nachrichten als zugestellt markiert.
+2026-07-08T02:33:36.795+02:00  INFO 22660 --- [MessageBroker-1] o.s.w.s.c.WebSocketMessageBrokerStats    : WebSocketSession[0 current WS(0)-HttpStream(0)-HttpPoll(0), 2 total, 0 closed abnormally (0 connect failure, 0 send limit, 0 transport error)], stompSubProtocol[processed CONNECT(2)-CONNECTED(2)-DISCONNECT(2)], stompBrokerRelay[null], inboundChannel[pool size = 0, active threads = 0, queued tasks = 0, completed tasks = 69], outboundChannel[pool size = 0, active threads = 0, queued tasks = 0, completed tasks = 8], sockJsScheduler[pool size = 2, active threads = 1, queued tasks = 0, completed tasks = 1]
